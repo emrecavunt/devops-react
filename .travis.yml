@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t  emrecavunt/devops-react -f ./web/Dockerfile.dev ./web
+  - docker build -t  emrecavunt/devops-react -f Dockerfile.dev ./web
 
 script:
   - docker run emrecavunt/devops-react npm run test -- --coverage
@@ -19,3 +19,5 @@ deploy:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
+
+
