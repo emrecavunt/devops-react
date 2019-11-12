@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t  emrecavunt/devops-react -f ./web/Dockerfile.dev ./web
+
+script:
+  - docker run emrecavunt/devops-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-1
+  app: "devops-react"
+  env: "DevopsReact-env"
+  bucket-name: "elasticbeanstalk-eu-west-1-779942513499"
+  bucket-path: "devops-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
